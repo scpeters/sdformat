@@ -7,7 +7,7 @@
 1. Changed the default radius of a Cylinder from 1.0 to 0.5 meters.
     * [Pull request 643](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/643)
 
-1. Initial version of sdformat 1.8 specification.
+1. Initial version of SDFormat 1.8 specification.
     * [Pull request 682](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/682)
 
 1. SDFormat 1.8: Deprecate //joint/axis/initial_position.
@@ -149,7 +149,7 @@
 1. Unversioned library name for ign tool commands.
     * [Pull request 612](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/612)
 
-1. Initial version of sdformat 1.7 specification.
+1. Initial version of SDFormat 1.7 specification.
     * [Pull request 588](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/588)
 
 1. Converter: add `<map>` element for converting fixed values.
@@ -380,7 +380,7 @@
 1. Added AirPressure SDF DOM
     * [Pull request 528](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/528)
 
-1. Update sdf noise elements
+1. Update SDFormat noise elements
     * [Pull request 525](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/525)
     * [Pull request 522](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/522)
 
@@ -510,7 +510,7 @@
     * [Pull request 557](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/557)
     * [pull request 464](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/464)
 
-1. Backport cmake and sdf spec changes from version 8.
+1. Backport cmake and SDFormat spec changes from version 8.
     * [Pull request 550](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/550)
     * [pull request 538](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/538)
     * [Pull request 525](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/525)
@@ -542,12 +542,12 @@
 1. SDF DOM: Add Element() accessor to Gui, JointAxis and World classes.
     * [Pull request 450](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/450)
 
-1. Adds the equalivent of gz sdf -d to sdformat. The command line option
+1. Adds the equalivent of gz sdf -d to libsdformat. The command line option
    will print the full description of the SDF spec.
     * [Pull request 424](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/424)
 
-1. Adds the equalivent of gz sdf -p to sdformat. The command line option
-   will convert and print the specified sdf file.
+1. Adds the equalivent of gz sdf -p to libsdformat. The command line option
+   will convert and print the specified SDFormat file.
     * [Pull request 494](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/494)
 
 1. SDF DOM: Additions to the document object model.
@@ -605,7 +605,7 @@
 1. Fix Windows support for libsdformat6
     * [Pull request 401](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/401)
 
-1. root.sdf: default sdf version 1.6
+1. root.sdf: default SDFormat version 1.6
     * [Pull request 425](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/425)
 
 1. parser\_urdf: print value of highstop instead of pointer address
@@ -678,7 +678,7 @@
 1. Fix parser to read plugin child elements within an `<include>`
     * [Pull request 350](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/350)
 
-1. Choosing models with more recent sdf version with `<include>` tag
+1. Choosing models with more recent SDFormat version with `<include>` tag
     * [Pull request 291](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/291)
     * [Issue 123](https://github.com/osrf/sdformat/issues/123)
 
@@ -705,7 +705,7 @@
 
 1. Fixed `sdf::convertFile` and `sdf::convertString` always converting to latest version
     * [Pull request 320](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/320)
-1. Added back the ability to set sdf version at runtime
+1. Added back the ability to set SDFormat version at runtime
     * [Pull request 307](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-requests/307)
 
 ### libsdformat 5.0.0 (2017-01-25)
@@ -767,7 +767,7 @@
 
 ### libsdformat 4.3.0 (2017-03-20)
 
-1. Choosing models with more recent sdf version with `<include>` tag
+1. Choosing models with more recent SDFormat version with `<include>` tag
     * [Pull request 291](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/291)
     * [Issue 123](https://github.com/osrf/sdformat/issues/123)
 
@@ -972,7 +972,7 @@
      * [Pull request 64](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/64)
 1. `<use_true_size>` element used by DEM heightmaps
      * [Pull request 67](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/67)
-1. Do not export urdf symbols in sdformat 1.4
+1. Do not export urdf symbols in SDFormat 1.4
      * [Pull request 75](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/75)
 1. adding deformable properties per issue #32
      * [Pull request 78](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/78)
@@ -987,7 +987,7 @@
      * [Gazebo issue 494](https://bitbucket.org/osrf/gazebo/issues/494)
 1. Implement SDF_PROTOCOL_VERSION (issue #51)
      * [Pull request 90](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/90)
-1. Port sdformat to compile on Windows (MSVC)
+1. Port libsdformat to compile on Windows (MSVC)
      * [Pull request 101](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/101)
 1. Separate material properties in material.sdf
      * [Pull request 104](https://osrf-migration.github.io/sdformat-gh-pages/#!/osrf/sdformat/pull-request/104)
