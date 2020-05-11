@@ -33,12 +33,12 @@
 #include "sdf/SDFImpl.hh"
 #include "sdf/World.hh"
 #include "sdf/parser.hh"
-#include "sdf/parser_urdf.hh"
 #include "sdf/sdf_config.h"
 
 #include "Converter.hh"
 #include "FrameSemantics.hh"
 #include "parser_private.hh"
+#include "parser_urdf.hh"
 
 namespace sdf
 {

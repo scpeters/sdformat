@@ -20,7 +20,7 @@
 #include <list>
 
 #include "sdf/sdf.hh"
-#include "sdf/parser_urdf.hh"
+#include "parser_urdf.hh"
 
 /////////////////////////////////////////////////
 std::string getMinimalUrdfTxt()
