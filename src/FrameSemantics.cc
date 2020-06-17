@@ -278,7 +278,7 @@ Errors buildFrameAttachedToGraph(
   {
     auto joint = _model->JointByIndex(j);
     auto jointId = _out.map.at(joint->Name());
-    auto childFrameName = joint->ChildLinkName();
+    auto childFrameName = joint->ChildName();
     if (_out.map.count(childFrameName) != 1)
     {
       errors.push_back({ErrorCode::JOINT_CHILD_LINK_INVALID,
@@ -573,7 +573,7 @@ Errors buildPoseRelativeToGraph(
     if (relativeTo.empty())
     {
       // since nothing else was specified, use the joint's child frame
-      relativeTo = joint->ChildLinkName();
+      relativeTo = joint->ChildName();
     }
 
     auto jointId = _out.map.at(joint->Name());

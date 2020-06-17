@@ -420,7 +420,7 @@ Errors Joint::ResolveChildLink(std::string &_link) const
   }
 
   std::string link;
-  errors = resolveFrameAttachedToBody(link, *graph, this->ChildLinkName());
+  errors = resolveFrameAttachedToBody(link, *graph, this->ChildName());
   if (errors.empty())
   {
     _link = link;
@@ -435,7 +435,7 @@ Errors Joint::ResolveParentLink(std::string &_link) const
 
   // special case for world, return without resolving since it's not in a
   // model's FrameAttachedToGraph
-  if ("world" == this->ParentLinkName())
+  if ("world" == this->ParentName())
   {
     _link = "world";
     return errors;
@@ -450,7 +450,7 @@ Errors Joint::ResolveParentLink(std::string &_link) const
   }
 
   std::string link;
-  errors = resolveFrameAttachedToBody(link, *graph, this->ParentLinkName());
+  errors = resolveFrameAttachedToBody(link, *graph, this->ParentName());
   if (errors.empty())
   {
     _link = link;
@@ -464,7 +464,7 @@ sdf::SemanticPose Joint::SemanticPose() const
   return sdf::SemanticPose(
       this->dataPtr->pose,
       this->dataPtr->poseRelativeTo,
-      this->ChildLinkName(),
+      this->ChildName(),
       this->dataPtr->poseRelativeToGraph);
 }
 

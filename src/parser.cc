@@ -1838,7 +1838,7 @@ bool checkJointParentChildLinkNames(const sdf::Root *_root)
     {
       auto joint = _model->JointByIndex(j);
 
-      const std::string &parentName = joint->ParentLinkName();
+      const std::string &parentName = joint->ParentName();
       if (parentName != "world" && !_model->LinkNameExists(parentName) &&
           !_model->JointNameExists(parentName) &&
           !_model->FrameNameExists(parentName))
@@ -1851,7 +1851,7 @@ bool checkJointParentChildLinkNames(const sdf::Root *_root)
         modelResult = false;
       }
 
-      const std::string &childName = joint->ChildLinkName();
+      const std::string &childName = joint->ChildName();
       if (childName == "world")
       {
         std::cerr << "Error: invalid child name[world"
