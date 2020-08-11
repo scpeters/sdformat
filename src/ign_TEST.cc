@@ -564,8 +564,33 @@ TEST(check, SDF)
     EXPECT_EQ("Valid.\n", output) << output;
   }
 
+  // Check an SDF file with nested_models using the relative_to attribute
+  // with :: syntax.
+  // This is a valid file.
+  {
+    std::string path = pathBase +"/model_nested_link_relative_to.sdf";
+
+    // Check model_nested_link_relative_to.sdf
+    std::string output =
+      custom_exec_str(g_ignCommand + " sdf -k " + path + g_sdfVersion);
+    EXPECT_EQ("Valid.\n", output) << output;
+  }
+
+  // Check an SDF file with a joint that specifies a child link within a
+  // sibling nested model using the :: syntax.
+  // This is a valid file.
+  {
+    std::string path = pathBase +"/model_nested_joint_child.sdf";
+
+    // Check model_nested_joint_child.sdf
+    std::string output =
+      custom_exec_str(g_ignCommand + " sdf -k " + path + g_sdfVersion);
+    EXPECT_EQ("Valid.\n", output) << output;
+  }
+
   // Check an invalid SDF file with a joint that specifies a child link
-  // within a sibling nested model using the unsupported :: syntax.
+  // within a sibling nested model using the :: syntax that is
+  // unsupported by SDFormat 1.7.
   {
     std::string path = pathBase +"/model_invalid_nested_joint_child.sdf";
 
