@@ -54,6 +54,16 @@ TEST(DOMModel, Construction)
   EXPECT_EQ(nullptr, model.ModelByName("default"));
   EXPECT_FALSE(model.ModelNameExists(""));
   EXPECT_FALSE(model.ModelNameExists("default"));
+  EXPECT_EQ(nullptr, model.ModelByNestedName(""));
+  EXPECT_EQ(nullptr, model.ModelByNestedName("default"));
+  EXPECT_EQ(nullptr, model.ModelByNestedName("a::b"));
+  EXPECT_EQ(nullptr, model.ModelByNestedName("a::b::c"));
+  EXPECT_EQ(nullptr, model.ModelByNestedName("::::"));
+  EXPECT_FALSE(model.ModelNestedNameExists(""));
+  EXPECT_FALSE(model.ModelNestedNameExists("default"));
+  EXPECT_FALSE(model.ModelNestedNameExists("a::b"));
+  EXPECT_FALSE(model.ModelNestedNameExists("a::b::c"));
+  EXPECT_FALSE(model.ModelNestedNameExists("::::"));
 
   EXPECT_EQ(0u, model.LinkCount());
   EXPECT_EQ(nullptr, model.LinkByIndex(0));
@@ -62,6 +72,16 @@ TEST(DOMModel, Construction)
   EXPECT_EQ(nullptr, model.LinkByName("default"));
   EXPECT_FALSE(model.LinkNameExists(""));
   EXPECT_FALSE(model.LinkNameExists("default"));
+  EXPECT_EQ(nullptr, model.LinkByNestedName(""));
+  EXPECT_EQ(nullptr, model.LinkByNestedName("default"));
+  EXPECT_EQ(nullptr, model.LinkByNestedName("a::b"));
+  EXPECT_EQ(nullptr, model.LinkByNestedName("a::b::c"));
+  EXPECT_EQ(nullptr, model.LinkByNestedName("::::"));
+  EXPECT_FALSE(model.LinkNestedNameExists(""));
+  EXPECT_FALSE(model.LinkNestedNameExists("default"));
+  EXPECT_FALSE(model.LinkNestedNameExists("a::b"));
+  EXPECT_FALSE(model.LinkNestedNameExists("a::b::c"));
+  EXPECT_FALSE(model.LinkNestedNameExists("::::"));
 
   EXPECT_EQ(0u, model.JointCount());
   EXPECT_EQ(nullptr, model.JointByIndex(0));
@@ -70,6 +90,16 @@ TEST(DOMModel, Construction)
   EXPECT_EQ(nullptr, model.JointByName("default"));
   EXPECT_FALSE(model.JointNameExists(""));
   EXPECT_FALSE(model.JointNameExists("default"));
+  EXPECT_EQ(nullptr, model.JointByNestedName(""));
+  EXPECT_EQ(nullptr, model.JointByNestedName("default"));
+  EXPECT_EQ(nullptr, model.JointByNestedName("a::b"));
+  EXPECT_EQ(nullptr, model.JointByNestedName("a::b::c"));
+  EXPECT_EQ(nullptr, model.JointByNestedName("::::"));
+  EXPECT_FALSE(model.JointNestedNameExists(""));
+  EXPECT_FALSE(model.JointNestedNameExists("default"));
+  EXPECT_FALSE(model.JointNestedNameExists("a::b"));
+  EXPECT_FALSE(model.JointNestedNameExists("a::b::c"));
+  EXPECT_FALSE(model.JointNestedNameExists("::::"));
 
   EXPECT_EQ(0u, model.FrameCount());
   EXPECT_EQ(nullptr, model.FrameByIndex(0));
@@ -78,6 +108,16 @@ TEST(DOMModel, Construction)
   EXPECT_EQ(nullptr, model.FrameByName("default"));
   EXPECT_FALSE(model.FrameNameExists(""));
   EXPECT_FALSE(model.FrameNameExists("default"));
+  EXPECT_EQ(nullptr, model.FrameByNestedName(""));
+  EXPECT_EQ(nullptr, model.FrameByNestedName("default"));
+  EXPECT_EQ(nullptr, model.FrameByNestedName("a::b"));
+  EXPECT_EQ(nullptr, model.FrameByNestedName("a::b::c"));
+  EXPECT_EQ(nullptr, model.FrameByNestedName("::::"));
+  EXPECT_FALSE(model.FrameNestedNameExists(""));
+  EXPECT_FALSE(model.FrameNestedNameExists("default"));
+  EXPECT_FALSE(model.FrameNestedNameExists("a::b"));
+  EXPECT_FALSE(model.FrameNestedNameExists("a::b::c"));
+  EXPECT_FALSE(model.FrameNestedNameExists("::::"));
 
   EXPECT_TRUE(model.CanonicalLinkName().empty());
   EXPECT_EQ(nullptr, model.CanonicalLink());

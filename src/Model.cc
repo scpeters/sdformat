@@ -590,6 +590,12 @@ bool Model::LinkNameExists(const std::string &_name) const
 }
 
 /////////////////////////////////////////////////
+bool Model::LinkNestedNameExists(const std::string &_name) const
+{
+  return nullptr != this->LinkByNestedName(_name);
+}
+
+/////////////////////////////////////////////////
 uint64_t Model::JointCount() const
 {
   return this->dataPtr->joints.size();
@@ -617,6 +623,12 @@ bool Model::JointNameExists(const std::string &_name) const
 }
 
 /////////////////////////////////////////////////
+bool Model::JointNestedNameExists(const std::string &_name) const
+{
+  return nullptr != this->JointByNestedName(_name);
+}
+
+/////////////////////////////////////////////////
 const Joint *Model::JointByName(const std::string &_name) const
 {
   for (auto const &j : this->dataPtr->joints)
@@ -627,6 +639,23 @@ const Joint *Model::JointByName(const std::string &_name) const
     }
   }
   return nullptr;
+}
+
+/////////////////////////////////////////////////
+const Joint *Model::JointByNestedName(const std::string &_name) const
+{
+  auto index = _name.rfind("::");
+  if (index == std::string::npos)
+  {
+    return this->JointByName(_name);
+  }
+
+  const Model *model = this->ModelByNestedName(_name.substr(0, index));
+  if (nullptr == model)
+  {
+    return nullptr;
+  }
+  return model->JointByName(_name.substr(index + 2));
 }
 
 /////////////////////////////////////////////////
@@ -657,6 +686,12 @@ bool Model::FrameNameExists(const std::string &_name) const
 }
 
 /////////////////////////////////////////////////
+bool Model::FrameNestedNameExists(const std::string &_name) const
+{
+  return nullptr != this->FrameByNestedName(_name);
+}
+
+/////////////////////////////////////////////////
 const Frame *Model::FrameByName(const std::string &_name) const
 {
   for (auto const &f : this->dataPtr->frames)
@@ -667,6 +702,23 @@ const Frame *Model::FrameByName(const std::string &_name) const
     }
   }
   return nullptr;
+}
+
+/////////////////////////////////////////////////
+const Frame *Model::FrameByNestedName(const std::string &_name) const
+{
+  auto index = _name.rfind("::");
+  if (index == std::string::npos)
+  {
+    return this->FrameByName(_name);
+  }
+
+  const Model *model = this->ModelByNestedName(_name.substr(0, index));
+  if (nullptr == model)
+  {
+    return nullptr;
+  }
+  return model->FrameByName(_name.substr(index + 2));
 }
 
 /////////////////////////////////////////////////
@@ -697,6 +749,12 @@ bool Model::ModelNameExists(const std::string &_name) const
 }
 
 /////////////////////////////////////////////////
+bool Model::ModelNestedNameExists(const std::string &_name) const
+{
+  return nullptr != this->ModelByNestedName(_name);
+}
+
+/////////////////////////////////////////////////
 const Model *Model::ModelByName(const std::string &_name) const
 {
   for (auto const &m : this->dataPtr->models)
@@ -707,6 +765,28 @@ const Model *Model::ModelByName(const std::string &_name) const
     }
   }
   return nullptr;
+}
+
+/////////////////////////////////////////////////
+const Model *Model::ModelByNestedName(const std::string &_name) const
+{
+  auto modelNames = sdf::split(_name, "::");
+  if (modelNames.empty())
+  {
+    return nullptr;
+  }
+
+  const sdf::Model* model = this;
+
+  for (const auto &modelName : modelNames)
+  {
+    if (nullptr == model)
+    {
+      return nullptr;
+    }
+    model = model->ModelByName(modelName);
+  }
+  return model;
 }
 
 /////////////////////////////////////////////////
@@ -840,6 +920,23 @@ const Link *Model::LinkByName(const std::string &_name) const
     }
   }
   return nullptr;
+}
+
+/////////////////////////////////////////////////
+const Link *Model::LinkByNestedName(const std::string &_name) const
+{
+  auto index = _name.rfind("::");
+  if (index == std::string::npos)
+  {
+    return this->LinkByName(_name);
+  }
+
+  const Model *model = this->ModelByNestedName(_name.substr(0, index));
+  if (nullptr == model)
+  {
+    return nullptr;
+  }
+  return model->LinkByName(_name.substr(index + 2));
 }
 
 /////////////////////////////////////////////////
