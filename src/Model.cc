@@ -579,20 +579,7 @@ const Link *Model::LinkByIndex(const uint64_t _index) const
 /////////////////////////////////////////////////
 bool Model::LinkNameExists(const std::string &_name) const
 {
-  for (auto const &l : this->dataPtr->links)
-  {
-    if (l.Name() == _name)
-    {
-      return true;
-    }
-  }
-  return false;
-}
-
-/////////////////////////////////////////////////
-bool Model::LinkNestedNameExists(const std::string &_name) const
-{
-  return nullptr != this->LinkByNestedName(_name);
+  return nullptr != this->LinkByName(_name);
 }
 
 /////////////////////////////////////////////////
@@ -612,25 +599,23 @@ const Joint *Model::JointByIndex(const uint64_t _index) const
 /////////////////////////////////////////////////
 bool Model::JointNameExists(const std::string &_name) const
 {
-  for (auto const &j : this->dataPtr->joints)
-  {
-    if (j.Name() == _name)
-    {
-      return true;
-    }
-  }
-  return false;
-}
-
-/////////////////////////////////////////////////
-bool Model::JointNestedNameExists(const std::string &_name) const
-{
-  return nullptr != this->JointByNestedName(_name);
+  return nullptr != this->JointByName(_name);
 }
 
 /////////////////////////////////////////////////
 const Joint *Model::JointByName(const std::string &_name) const
 {
+  auto index = _name.rfind("::");
+  if (index != std::string::npos)
+  {
+    const Model *model = this->ModelByName(_name.substr(0, index));
+    if (nullptr == model)
+    {
+      return nullptr;
+    }
+    return model->JointByName(_name.substr(index + 2));
+  }
+
   for (auto const &j : this->dataPtr->joints)
   {
     if (j.Name() == _name)
@@ -639,23 +624,6 @@ const Joint *Model::JointByName(const std::string &_name) const
     }
   }
   return nullptr;
-}
-
-/////////////////////////////////////////////////
-const Joint *Model::JointByNestedName(const std::string &_name) const
-{
-  auto index = _name.rfind("::");
-  if (index == std::string::npos)
-  {
-    return this->JointByName(_name);
-  }
-
-  const Model *model = this->ModelByNestedName(_name.substr(0, index));
-  if (nullptr == model)
-  {
-    return nullptr;
-  }
-  return model->JointByName(_name.substr(index + 2));
 }
 
 /////////////////////////////////////////////////
@@ -675,25 +643,23 @@ const Frame *Model::FrameByIndex(const uint64_t _index) const
 /////////////////////////////////////////////////
 bool Model::FrameNameExists(const std::string &_name) const
 {
-  for (auto const &f : this->dataPtr->frames)
-  {
-    if (f.Name() == _name)
-    {
-      return true;
-    }
-  }
-  return false;
-}
-
-/////////////////////////////////////////////////
-bool Model::FrameNestedNameExists(const std::string &_name) const
-{
-  return nullptr != this->FrameByNestedName(_name);
+  return nullptr != this->FrameByName(_name);
 }
 
 /////////////////////////////////////////////////
 const Frame *Model::FrameByName(const std::string &_name) const
 {
+  auto index = _name.rfind("::");
+  if (index != std::string::npos)
+  {
+    const Model *model = this->ModelByName(_name.substr(0, index));
+    if (nullptr == model)
+    {
+      return nullptr;
+    }
+    return model->FrameByName(_name.substr(index + 2));
+  }
+
   for (auto const &f : this->dataPtr->frames)
   {
     if (f.Name() == _name)
@@ -702,23 +668,6 @@ const Frame *Model::FrameByName(const std::string &_name) const
     }
   }
   return nullptr;
-}
-
-/////////////////////////////////////////////////
-const Frame *Model::FrameByNestedName(const std::string &_name) const
-{
-  auto index = _name.rfind("::");
-  if (index == std::string::npos)
-  {
-    return this->FrameByName(_name);
-  }
-
-  const Model *model = this->ModelByNestedName(_name.substr(0, index));
-  if (nullptr == model)
-  {
-    return nullptr;
-  }
-  return model->FrameByName(_name.substr(index + 2));
 }
 
 /////////////////////////////////////////////////
@@ -738,55 +687,30 @@ const Model *Model::ModelByIndex(const uint64_t _index) const
 /////////////////////////////////////////////////
 bool Model::ModelNameExists(const std::string &_name) const
 {
-  for (auto const &m : this->dataPtr->models)
-  {
-    if (m.Name() == _name)
-    {
-      return true;
-    }
-  }
-  return false;
-}
-
-/////////////////////////////////////////////////
-bool Model::ModelNestedNameExists(const std::string &_name) const
-{
-  return nullptr != this->ModelByNestedName(_name);
+  return nullptr != this->ModelByName(_name);
 }
 
 /////////////////////////////////////////////////
 const Model *Model::ModelByName(const std::string &_name) const
 {
+  auto index = _name.find("::");
+  const std::string nextModelName = _name.substr(0, index);
+  const Model *nextModel = nullptr;
+
   for (auto const &m : this->dataPtr->models)
   {
-    if (m.Name() == _name)
+    if (m.Name() == nextModelName)
     {
-      return &m;
+      nextModel = &m;
+      break;
     }
   }
-  return nullptr;
-}
 
-/////////////////////////////////////////////////
-const Model *Model::ModelByNestedName(const std::string &_name) const
-{
-  auto modelNames = sdf::split(_name, "::");
-  if (modelNames.empty())
+  if (nullptr != nextModel && index != std::string::npos)
   {
-    return nullptr;
+    return nextModel->ModelByName(_name.substr(index + 2));
   }
-
-  const sdf::Model* model = this;
-
-  for (const auto &modelName : modelNames)
-  {
-    if (nullptr == model)
-    {
-      return nullptr;
-    }
-    model = model->ModelByName(modelName);
-  }
-  return model;
+  return nextModel;
 }
 
 /////////////////////////////////////////////////
@@ -912,6 +836,17 @@ sdf::SemanticPose Model::SemanticPose() const
 /////////////////////////////////////////////////
 const Link *Model::LinkByName(const std::string &_name) const
 {
+  auto index = _name.rfind("::");
+  if (index != std::string::npos)
+  {
+    const Model *model = this->ModelByName(_name.substr(0, index));
+    if (nullptr == model)
+    {
+      return nullptr;
+    }
+    return model->LinkByName(_name.substr(index + 2));
+  }
+
   for (auto const &l : this->dataPtr->links)
   {
     if (l.Name() == _name)
@@ -920,23 +855,6 @@ const Link *Model::LinkByName(const std::string &_name) const
     }
   }
   return nullptr;
-}
-
-/////////////////////////////////////////////////
-const Link *Model::LinkByNestedName(const std::string &_name) const
-{
-  auto index = _name.rfind("::");
-  if (index == std::string::npos)
-  {
-    return this->LinkByName(_name);
-  }
-
-  const Model *model = this->ModelByNestedName(_name.substr(0, index));
-  if (nullptr == model)
-  {
-    return nullptr;
-  }
-  return model->LinkByName(_name.substr(index + 2));
 }
 
 /////////////////////////////////////////////////

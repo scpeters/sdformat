@@ -173,15 +173,12 @@ TEST(DOMRoot, NestedModel)
 
   EXPECT_TRUE(model->LinkNameExists("parent"));
   EXPECT_TRUE(model->LinkNameExists("child"));
-  EXPECT_TRUE(model->LinkNestedNameExists("parent"));
-  EXPECT_TRUE(model->LinkNestedNameExists("child"));
 
   EXPECT_EQ(1u, model->JointCount());
   EXPECT_NE(nullptr, model->JointByIndex(0));
   EXPECT_EQ(nullptr, model->JointByIndex(1));
 
   EXPECT_TRUE(model->JointNameExists("top_level_joint"));
-  EXPECT_TRUE(model->JointNestedNameExists("top_level_joint"));
 
   ASSERT_EQ(1u, model->ModelCount());
   const sdf::Model *nestedModel = model->ModelByIndex(0);
@@ -189,9 +186,7 @@ TEST(DOMRoot, NestedModel)
   EXPECT_EQ(nullptr, model->ModelByIndex(1));
 
   EXPECT_TRUE(model->ModelNameExists("nested_model"));
-  EXPECT_TRUE(model->ModelNestedNameExists("nested_model"));
   EXPECT_EQ(nestedModel, model->ModelByName("nested_model"));
-  EXPECT_EQ(nestedModel, model->ModelByNestedName("nested_model"));
   EXPECT_EQ("nested_model", nestedModel->Name());
 
   EXPECT_EQ(1u, nestedModel->LinkCount());
@@ -199,15 +194,14 @@ TEST(DOMRoot, NestedModel)
   EXPECT_EQ(nullptr, nestedModel->LinkByIndex(1));
 
   EXPECT_TRUE(nestedModel->LinkNameExists("nested_link01"));
-  EXPECT_TRUE(nestedModel->LinkNestedNameExists("nested_link01"));
 
   EXPECT_EQ(0u, nestedModel->JointCount());
   EXPECT_EQ(0u, nestedModel->FrameCount());
 
   // get nested link from parent model
   const std::string linkNestedName = "nested_model::nested_link01";
-  EXPECT_TRUE(model->LinkNestedNameExists(linkNestedName));
-  const sdf::Link *nestedLink01 = model->LinkByNestedName(linkNestedName);
+  EXPECT_TRUE(model->LinkNameExists(linkNestedName));
+  const sdf::Link *nestedLink01 = model->LinkByName(linkNestedName);
   EXPECT_NE(nullptr, nestedLink01);
 }
 
@@ -234,22 +228,18 @@ TEST(DOMRoot, MultiNestedModel)
   EXPECT_EQ(nullptr, outerModel->LinkByIndex(1));
 
   EXPECT_TRUE(outerModel->LinkNameExists("outer_link"));
-  EXPECT_TRUE(outerModel->LinkNestedNameExists("outer_link"));
 
   EXPECT_EQ(1u, outerModel->JointCount());
   EXPECT_TRUE(outerModel->JointNameExists("outer_joint"));
-  EXPECT_TRUE(outerModel->JointNestedNameExists("outer_joint"));
 
   EXPECT_EQ(1u, outerModel->FrameCount());
   EXPECT_TRUE(outerModel->FrameNameExists("outer_frame"));
-  EXPECT_TRUE(outerModel->FrameNestedNameExists("outer_frame"));
 
   EXPECT_EQ(1u, outerModel->ModelCount());
   EXPECT_NE(nullptr, outerModel->ModelByIndex(0));
   EXPECT_EQ(nullptr, outerModel->ModelByIndex(1));
 
   EXPECT_TRUE(outerModel->ModelNameExists("mid_model"));
-  EXPECT_TRUE(outerModel->ModelNestedNameExists("mid_model"));
 
   // Get the middle model
   const sdf::Model *midModel = outerModel->ModelByIndex(0);
@@ -260,22 +250,18 @@ TEST(DOMRoot, MultiNestedModel)
   EXPECT_EQ(nullptr, midModel->LinkByIndex(1));
 
   EXPECT_TRUE(midModel->LinkNameExists("mid_link"));
-  EXPECT_TRUE(midModel->LinkNestedNameExists("mid_link"));
 
   EXPECT_EQ(1u, midModel->JointCount());
   EXPECT_TRUE(midModel->JointNameExists("mid_joint"));
-  EXPECT_TRUE(midModel->JointNestedNameExists("mid_joint"));
 
   EXPECT_EQ(1u, midModel->FrameCount());
   EXPECT_TRUE(midModel->FrameNameExists("mid_frame"));
-  EXPECT_TRUE(midModel->FrameNestedNameExists("mid_frame"));
 
   EXPECT_EQ(1u, midModel->ModelCount());
   EXPECT_NE(nullptr, midModel->ModelByIndex(0));
   EXPECT_EQ(nullptr, midModel->ModelByIndex(1));
 
   EXPECT_TRUE(midModel->ModelNameExists("inner_model"));
-  EXPECT_TRUE(midModel->ModelNestedNameExists("inner_model"));
 
   // Get the inner model
   const sdf::Model *innerModel = midModel->ModelByIndex(0);
@@ -289,30 +275,28 @@ TEST(DOMRoot, MultiNestedModel)
 
   EXPECT_EQ(1u, innerModel->JointCount());
   EXPECT_TRUE(innerModel->JointNameExists("inner_joint"));
-  EXPECT_TRUE(innerModel->JointNestedNameExists("inner_joint"));
 
   EXPECT_EQ(1u, innerModel->FrameCount());
   EXPECT_TRUE(innerModel->FrameNameExists("inner_frame"));
-  EXPECT_TRUE(innerModel->FrameNestedNameExists("inner_frame"));
 
   EXPECT_EQ(0u, innerModel->ModelCount());
 
   // test nested names from outer model
   const std::string innerModelNestedName = "mid_model::inner_model";
-  EXPECT_TRUE(outerModel->ModelNestedNameExists(innerModelNestedName));
-  EXPECT_EQ(innerModel, outerModel->ModelByNestedName(innerModelNestedName));
+  EXPECT_TRUE(outerModel->ModelNameExists(innerModelNestedName));
+  EXPECT_EQ(innerModel, outerModel->ModelByName(innerModelNestedName));
 
   const std::string innerLinkNestedName = innerModelNestedName + "::inner_link";
-  EXPECT_TRUE(outerModel->LinkNestedNameExists(innerLinkNestedName));
-  EXPECT_NE(nullptr, outerModel->LinkByNestedName(innerLinkNestedName));
+  EXPECT_TRUE(outerModel->LinkNameExists(innerLinkNestedName));
+  EXPECT_NE(nullptr, outerModel->LinkByName(innerLinkNestedName));
 
   std::string innerJointNestedName = innerModelNestedName + "::inner_joint";
-  EXPECT_TRUE(outerModel->JointNestedNameExists(innerJointNestedName));
-  EXPECT_NE(nullptr, outerModel->JointByNestedName(innerJointNestedName));
+  EXPECT_TRUE(outerModel->JointNameExists(innerJointNestedName));
+  EXPECT_NE(nullptr, outerModel->JointByName(innerJointNestedName));
 
   std::string innerFrameNestedName = innerModelNestedName + "::inner_frame";
-  EXPECT_TRUE(outerModel->FrameNestedNameExists(innerFrameNestedName));
-  EXPECT_NE(nullptr, outerModel->FrameByNestedName(innerFrameNestedName));
+  EXPECT_TRUE(outerModel->FrameNameExists(innerFrameNestedName));
+  EXPECT_NE(nullptr, outerModel->FrameByName(innerFrameNestedName));
 }
 
 /////////////////////////////////////////////////
