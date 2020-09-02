@@ -1068,7 +1068,8 @@ bool readXml(tinyxml2::XMLElement *_xml, ElementPtr _sdf, Errors &_errors)
 
         if (_sdf->GetName() == "model")
         {
-          addNestedModel(_sdf, includeSDF->Root(), _errors);
+          topLevelElem->SetParent(_sdf);
+          _sdf->InsertElement(topLevelElem);
         }
         else
         {
