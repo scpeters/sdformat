@@ -9,6 +9,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: test multi-line command
+      run: |
+        pwd
+        ls -l
+        env \
+          | grep PATH
     - name: Install base dependencies
       run: |
         sudo apt update;
