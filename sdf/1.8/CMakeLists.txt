@@ -9,6 +9,7 @@ set (sdfs
   camera.sdf
   collision.sdf
   contact.sdf
+  capsule_shape.sdf
   cylinder_shape.sdf
   frame.sdf
   forcetorque.sdf
