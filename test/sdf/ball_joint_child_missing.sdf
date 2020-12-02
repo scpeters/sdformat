@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="ball_joint_child_missing">
+    <link name="link">
+      <pose>0 0 1 0 0 0</pose>
+    </link>
+    <joint name="joint" type="ball">
+      <pose>0 0 3 0 0 0</pose>
+      <parent>link</parent>
+    </joint>
+  </model>
+</sdf>
