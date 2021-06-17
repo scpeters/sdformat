@@ -116,6 +116,12 @@ TEST(SetFromString, DoublePositiveInf)
     EXPECT_TRUE(doubleParam.SetFromString(infString));
     EXPECT_TRUE(doubleParam.Get<double>(value));
     EXPECT_DOUBLE_EQ(std::numeric_limits<double>::infinity(), value);
+
+    sdf::Param stringParam("key", "string", "", false, "description");
+
+    EXPECT_TRUE(stringParam.SetFromString(infString));
+    EXPECT_TRUE(stringParam.Get<double>(value));
+    EXPECT_DOUBLE_EQ(std::numeric_limits<double>::infinity(), value);
   }
 }
 
@@ -133,6 +139,12 @@ TEST(SetFromString, DoubleNegativeInf)
 
     EXPECT_TRUE(doubleParam.SetFromString(infString));
     EXPECT_TRUE(doubleParam.Get<double>(value));
+    EXPECT_DOUBLE_EQ(- std::numeric_limits<double>::infinity(), value);
+
+    sdf::Param stringParam("key", "string", "0", false, "description");
+
+    EXPECT_TRUE(stringParam.SetFromString(infString));
+    EXPECT_TRUE(stringParam.Get<double>(value));
     EXPECT_DOUBLE_EQ(- std::numeric_limits<double>::infinity(), value);
   }
 }
