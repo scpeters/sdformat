@@ -323,6 +323,10 @@ namespace sdf
           std::stringstream ss;
           ss << ParamStreamer{this->dataPtr->value};
           ss >> _value;
+          if (ss.fail())
+          {
+            return false;
+          }
         }
       }
     }

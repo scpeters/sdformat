@@ -114,7 +114,7 @@ TEST(SetFromString, DoublePositiveInf)
     double value = 0.;
 
     EXPECT_TRUE(doubleParam.SetFromString(infString));
-    doubleParam.Get<double>(value);
+    EXPECT_TRUE(doubleParam.Get<double>(value));
     EXPECT_DOUBLE_EQ(std::numeric_limits<double>::infinity(), value);
   }
 }
@@ -132,7 +132,7 @@ TEST(SetFromString, DoubleNegativeInf)
     double value = 0.;
 
     EXPECT_TRUE(doubleParam.SetFromString(infString));
-    doubleParam.Get<double>(value);
+    EXPECT_TRUE(doubleParam.Get<double>(value));
     EXPECT_DOUBLE_EQ(- std::numeric_limits<double>::infinity(), value);
   }
 }
