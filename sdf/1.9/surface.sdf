@@ -13,6 +13,29 @@
   <element name="friction" required="0">
     <description></description>
 
+    <element name="rolling" required="0">
+      <description>Parameters for rolling friction</description>
+      <element name="deformation_length" type="double" default="0.01" min="0.0" required="0">
+        <description>
+          A length representing the displacement of the centroid of a contact
+          pressure distribution. It is analogous to a moment arm for the
+          contact normal force. This is equivalent to the the rolling friction
+          coefficient in an MJCF file.
+        </description>
+      </element>
+      <element name="coefficient" type="double" default="0.01" min="0.0" required="0">
+        <description>
+          A non-dimensional measure of rolling resistance, expressed as a
+          unitless ratio of the deformation length to a half-extent of the
+          rolling object (such as deformation_length / radius).
+          This is equivalent to the rolling resistance coefficient used in
+          automotive engineering (see
+          https://en.wikipedia.org/wiki/SAE_J1269 and
+          https://en.wikipedia.org/wiki/SAE_J2452).
+        </description>
+      </element>
+    </element> <!-- End torsional -->
+
     <element name="torsional" required="0">
       <description>Parameters for torsional friction</description>
       <element name="coefficient" type="double" default="1.0" min="0.0" required="0">
