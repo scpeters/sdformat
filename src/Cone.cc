@@ -159,6 +159,8 @@ std::optional<gz::math::Inertiald> Cone::CalculateInertial(double _density)
   {
     gz::math::Inertiald coneInertial;
     coneInertial.SetMassMatrix(coneMassMatrix.value());
+    coneInertial.SetPose(
+      gz::math::Pose3d(0, 0, -0.25 * this->dataPtr->cone.Length(), 0, 0, 0));
     return std::make_optional(coneInertial);
   }
 }

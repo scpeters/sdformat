@@ -124,7 +124,7 @@
       <link name='link'>
         <inertial auto='true'>
           <density>12</density>
-          <pose>0 0 0 0 0 0</pose>
+          <pose>0 0 -0.25 0 0 0</pose>
           <mass>9.4247779607693793</mass>
           <inertia>
             <ixx>0.70685834705770345</ixx>
