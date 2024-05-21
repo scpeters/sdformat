@@ -1,0 +1,170 @@
+<sdf version='1.12'>
+  <world name='unit_shapes'>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1.3999999999999999 6.2999999999999998</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>2 4</size>
+            </plane>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name='unit_box'>
+      <pose relative_to='ground_plane'>0 0 0.5 0 0 0</pose>
+      <link name='link'>
+        <inertial auto='true'>
+          <density>12</density>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>12</mass>
+          <inertia>
+            <ixx>2</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2</iyy>
+            <iyz>0</iyz>
+            <izz>2</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name='box_vis'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name='unit_cylinder'>
+      <pose relative_to='unit_box'>2 0 0 0 0 0</pose>
+      <link name='link'>
+        <inertial auto='true'>
+          <density>12</density>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>9.4247779607693793</mass>
+          <inertia>
+            <ixx>1.3744467859455345</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.3744467859455345</iyy>
+            <iyz>0</iyz>
+            <izz>1.1780972450961724</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name='unit_sphere'>
+      <pose relative_to='unit_cylinder'>2 0 0 0 0 0</pose>
+      <link name='link'>
+        <inertial auto='true'>
+          <density>12</density>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>6.2831853071795862</mass>
+          <inertia>
+            <ixx>0.62831853071795862</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.62831853071795862</iyy>
+            <iyz>0</iyz>
+            <izz>0.62831853071795862</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.5</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name='sphere_vis'>
+          <geometry>
+            <sphere>
+              <radius>0.5</radius>
+            </sphere>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name='unit_cone'>
+      <pose relative_to='unit_sphere'>2 0 0 0 0 0</pose>
+      <link name='link'>
+        <inertial auto='true'>
+          <density>12</density>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>9.4247779607693793</mass>
+          <inertia>
+            <ixx>0.70685834705770345</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.70685834705770345</iyy>
+            <iyz>0</iyz>
+            <izz>0.70685834705770345</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cone>
+              <radius>0.5</radius>
+              <length>1</length>
+            </cone>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cone>
+              <radius>0.5</radius>
+              <length>1</length>
+            </cone>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+  </world>
+</sdf>

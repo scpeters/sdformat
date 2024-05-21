@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<sdf version="1.12">
+  <world name="unit_shapes">
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1.4 6.3</size>
+            </plane>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>2 4</size>
+            </plane>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="unit_box">
+      <pose relative_to="ground_plane">0 0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial auto="true">
+          <density>12</density>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="box_vis">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="unit_cylinder">
+      <pose relative_to="unit_box">2 0 0 0 0 0</pose>
+      <link name="link">
+        <inertial auto="true">
+          <density>12</density>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>1.0</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>1.0</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="unit_sphere">
+      <pose relative_to="unit_cylinder">2 0 0 0 0 0</pose>
+      <link name="link">
+        <inertial auto="true">
+          <density>12</density>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.5</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="sphere_vis">
+          <geometry>
+            <sphere>
+              <radius>0.5</radius>
+            </sphere>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="unit_cone">
+      <pose relative_to="unit_sphere">2 0 0 0 0 0</pose>
+      <link name="link">
+        <inertial auto="true">
+          <density>12</density>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cone>
+              <radius>0.5</radius>
+              <length>1.0</length>
+            </cone>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cone>
+              <radius>0.5</radius>
+              <length>1.0</length>
+            </cone>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
