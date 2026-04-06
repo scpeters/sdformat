@@ -3,6 +3,11 @@ name: Ubuntu CI from source
 on:
   workflow_dispatch:
     inputs:
+      packages-to-test:
+        description: Names of packages to test (e.g. 'gz-math sdformat').
+        required: true
+        type: string
+        default: sdformat
       vcs-repo-file-base:
         description: Choose whether vcs-repo-file represents a relative path in the github workspace or a URL.
         required: true
@@ -29,7 +34,7 @@ jobs:
       - name: Compile and test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
-          package-name: sdformat
+          package-name: ${{ inputs.packages-to-test }}
           target-ros2-distro: kilted
           vcs-repo-file-url: >
             ${{ case(
