@@ -1,4 +1,5 @@
 name: Ubuntu CI from source
+run-name: Testing ${{ inputs.packages-to-test }} | vcs ${{ inputs.vcs-repo-file-base }} ${{ inputs.vcs-repo-file }}
 
 on:
   workflow_dispatch:
@@ -38,7 +39,7 @@ jobs:
           target-ros2-distro: kilted
           vcs-repo-file-url: >
             ${{ case(
-              inputs.vcs-repo-file-base == 'relative', format('{0}/', github.workspace),
+              inputs.vcs-repo-file-base == 'relative', format('{0}/{1}', github.workspace, inputs.vcs-repo-file),
               inputs.vcs-repo-file
             ) }}
           colcon-defaults: |
