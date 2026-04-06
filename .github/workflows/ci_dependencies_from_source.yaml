@@ -1,4 +1,4 @@
-name: Ubuntu CI
+name: Ubuntu CI from source
 
 on:
   workflow_dispatch:
@@ -31,7 +31,11 @@ jobs:
         with:
           package-name: sdformat
           target-ros2-distro: kilted
-          vcs-repo-file-url: ${{ inputs.vcs-repo-file-base == 'relative' && format('{0}/', github.workspace) }}${{ inputs.vcs-repo-file }}
+          vcs-repo-file-url: |-
+            ${{ case(
+              inputs.vcs-repo-file-base == 'relative', format('{0}/', github.workspace),
+              inputs.vcs-repo-file,
+            ) }}
           colcon-defaults: |
             {
               "build": {
