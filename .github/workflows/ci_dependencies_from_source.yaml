@@ -1,0 +1,40 @@
+name: Ubuntu CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      vcs-repo-file-is-relative:
+        description: If true the vcs-repo-file is a relative path in the github workspace; otherwise it is a URL.
+        type: bool
+        required: True
+        default: True
+      vcs-repo-file:
+        description: Relative path or URL to vcs repo file to import into colcon workspace
+        required: true
+        type: string
+        default: ".github/ci/packages_up_to_sdformat.yaml"
+
+jobs:
+  noble-ci:
+    runs-on: ubuntu-latest
+    name: Ubuntu Noble CI (from source)
+    container:
+      image: rostooling/setup-ros-docker:ubuntu-noble-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Compile and test
+        uses: ros-tooling/action-ros-ci@v0.4
+        with:
+          package-name: sdformat
+          target-ros2-distro: kilted
+          vcs-repo-file-url: ${{ inputs.vcs-repo-file-is-relative && format('{0}/', github.workspace) }}${{ inputs.vcs-repo-file }}
+          colcon-defaults: |
+            {
+              "build": {
+                "merge-install": true
+              },
+              "test": {
+                "merge-install": true
+              }
+            }
