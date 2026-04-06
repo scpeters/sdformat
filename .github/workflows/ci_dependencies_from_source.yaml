@@ -31,7 +31,7 @@ jobs:
         with:
           package-name: sdformat
           target-ros2-distro: kilted
-          vcs-repo-file-url: |-
+          vcs-repo-file-url: >
             ${{ case(
               inputs.vcs-repo-file-base == 'relative', format('{0}/', github.workspace),
               inputs.vcs-repo-file,
