@@ -3,11 +3,14 @@ name: Ubuntu CI
 on:
   workflow_dispatch:
     inputs:
-      vcs-repo-file-is-relative:
-        description: If true the vcs-repo-file is a relative path in the github workspace; otherwise it is a URL.
-        type: bool
-        required: True
-        default: True
+      vcs-repo-file-base:
+        description: Choose whether vcs-repo-file represents a relative path in the github workspace or a URL.
+        required: true
+        default: relative
+        type: choice
+        options:
+          - relative
+          - url
       vcs-repo-file:
         description: Relative path or URL to vcs repo file to import into colcon workspace
         required: true
@@ -28,7 +31,7 @@ jobs:
         with:
           package-name: sdformat
           target-ros2-distro: kilted
-          vcs-repo-file-url: ${{ inputs.vcs-repo-file-is-relative && format('{0}/', github.workspace) }}${{ inputs.vcs-repo-file }}
+          vcs-repo-file-url: ${{ inputs.vcs-repo-file-base == 'relative' && format('{0}/', github.workspace) }}${{ inputs.vcs-repo-file }}
           colcon-defaults: |
             {
               "build": {
