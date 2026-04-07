@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: echo bool_test
-        run: echo __${{ case( inputs.bool_test, "bool_test is true", "") }}__
+        run: echo __${{ case( inputs.bool_test, 'bool_test is true', '') }}__
       - name: Compile and test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
