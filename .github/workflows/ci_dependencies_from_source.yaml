@@ -37,6 +37,8 @@ jobs:
         uses: actions/checkout@v4
       - name: echo bool_test
         run: echo __${{ case( github.event_name == 'workflow_dispatch' && inputs.bool_test, 'bool_test is true', '') }}__
+      - name: failure
+        run: exit 1
       - name: Compile and test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
