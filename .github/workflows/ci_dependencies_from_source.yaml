@@ -36,6 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: echo bool_test
+        continue-on-error: true
         run: echo __${{ case( github.event_name == 'workflow_dispatch' && inputs.bool_test, 'bool_test is true', '') }}__
       - name: failure
         run: exit 1
