@@ -30,7 +30,6 @@ jobs:
   noble-ci:
     runs-on: ubuntu-latest
     name: Ubuntu Noble CI (from source)
-    continue-on-error: true
     container:
       image: rostooling/setup-ros-docker:ubuntu-noble-latest
     steps:
@@ -41,6 +40,7 @@ jobs:
       - name: failure
         run: exit 1
       - name: Compile and test
+        if: github.event_name == 'workflow_dispatch'
         uses: ros-tooling/action-ros-ci@v0.4
         with:
           package-name: ${{ inputs.packages-to-test }}
