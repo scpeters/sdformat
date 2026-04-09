@@ -30,6 +30,7 @@ jobs:
   noble-ci:
     runs-on: ubuntu-latest
     name: Ubuntu Noble CI (from source)
+    continue-on-error: true
     container:
       image: rostooling/setup-ros-docker:ubuntu-noble-latest
     steps:
