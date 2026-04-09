@@ -30,6 +30,9 @@ jobs:
   noble-ci:
     runs-on: ubuntu-latest
     name: Ubuntu Noble CI (from source)
+    strategy:
+      matrix:
+        build_flags: ["a", "b"]
     container:
       image: rostooling/setup-ros-docker:ubuntu-noble-latest
     steps:
@@ -38,6 +41,7 @@ jobs:
       - name: echo bool_test
         run: echo __${{ case( github.event_name == 'workflow_dispatch' && inputs.bool_test, 'bool_test is true', '') }}__
       - name: failure
+        if: matrix.build_flags == 'a'
         run: exit 1
       - name: Compile and test
         if: success() || github.event_name == 'workflow_dispatch'
