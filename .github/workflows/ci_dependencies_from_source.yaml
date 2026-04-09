@@ -44,7 +44,6 @@ jobs:
         if: matrix.build_flags == 'a'
         run: exit 1
       - name: Compile and test
-        if: success() || github.event_name == 'workflow_dispatch'
         uses: ros-tooling/action-ros-ci@v0.4
         with:
           package-name: ${{ inputs.packages-to-test }}
