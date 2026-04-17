@@ -10,7 +10,7 @@ on:
         type: string
         default: sdformat
       vcs-repo-file-base:
-        description: Choose whether vcs-repo-file represents a relative path in the github workspace or a URL.
+        description: 'Choose whether vcs-repo-file represents a relative path in the github workspace or a [URL](http://example.com).'
         required: true
         default: relative
         type: choice
