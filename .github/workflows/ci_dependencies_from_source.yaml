@@ -70,5 +70,6 @@ jobs:
         run: |
           JSON_TEST="{ \"key1\": \"${{ github.run_id }}\", \"key2\": \"$RUN_ID\" }"
           echo $JSON_TEST
+          sudo apt update
           sudo apt install -y jq
           echo $JSON_TEST | jq .
