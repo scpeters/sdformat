@@ -63,3 +63,11 @@ jobs:
                 "merge-install": true
               }
             }
+      -  name: on failure
+        if: failure()
+        env:
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          
+          JSON_TEST="{ \"key1\": \"${{ github.run_id }}\", \"key2\": \"$RUN_ID\" }"
+          echo $JSON_TEST | jq .
