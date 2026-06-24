@@ -2,6 +2,9 @@ name: Ubuntu CI from source
 run-name: Testing ${{ inputs.packages-to-test }} | vcs ${{ inputs.vcs-repo-file-base }} ${{ inputs.vcs-repo-file }}
 
 on:
+  push:
+    branches:
+      - 'scpeters/action_ros_ci_rotary'
   workflow_dispatch:
     inputs:
       packages-to-test:
@@ -35,13 +38,9 @@ jobs:
       - name: Compile and test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
-          package-name: ${{ inputs.packages-to-test }}
+          package-name: sdformat
           target-ros2-distro: lyrical
-          vcs-repo-file-url: >
-            ${{ case(
-              inputs.vcs-repo-file-base == 'relative', format('{0}/{1}', github.workspace, inputs.vcs-repo-file),
-              inputs.vcs-repo-file
-            ) }}
+          vcs-repo-file-url: ${{ github.workspace }}/.github/ci/packages_up_to_sdformat.yaml
           colcon-defaults: |
             {
               "build": {
