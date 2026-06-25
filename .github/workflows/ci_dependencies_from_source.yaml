@@ -38,9 +38,9 @@ jobs:
       - name: Compile and test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
-          package-name: sdformat
+          package-name: gz-physics
           target-ros2-distro: lyrical
-          vcs-repo-file-url: ${{ github.workspace }}/.github/ci/packages_up_to_sdformat.yaml
+          vcs-repo-file-url: ${{ github.workspace }}/.github/ci/collection.yaml
           colcon-defaults: |
             {
               "build": {
